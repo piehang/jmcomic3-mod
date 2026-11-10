@@ -1,0 +1,74 @@
+# JMComic3 v2.1.12 修改版（天堂）
+
+基于官方 v2.1.12 APK 的本地逆向修改版，仅供个人学习研究使用。
+
+## 修改清单
+
+| 类别 | 内容 |
+|---|---|
+| 广告清理 | 全量去除 80+ 广告位（8038 组件全局禁渲染、闪屏、banner、文字链接、底部 tab 广告、详情页自定义横幅等） |
+| 板块精简 | 移除游戏/电影板块入口与路由、个人中心 tab、顶栏 logo、签到/赞助浮动按钮、年龄确认页 |
+| 启动流程 | 跳过开屏广告倒计时页与四格广告页：打开 → 选线路 → 直接进主页 |
+| 语言 | 强制简体中文（启用内置 zh-CN 语言包 + 全量 JS 繁转简） |
+| 包名 | `com.a7m3p9xv.t6qk2z9.app`（可与官方版共存） |
+| 应用名/图标 | 应用名"天堂"，白色圆底小猫图标 |
+
+## 安装
+
+1. 下载 [Releases](https://github.com/piehang/jmcomic3-mod/releases) 中的 APK
+2. 允许安装未知来源应用，直接安装
+3. **与官方版互不兼容**：改了包名，无法覆盖官方版；两者可共存
+
+## 技术要点
+
+- 签名校验绕过：dex 内等长替换证书指纹 + string_ids 排序验证 + DEX header 重算
+- 所有 JS/资源修改均为字节级等长替换（webpack 混淆代码零重排）
+- arsc 字符串池结构级修改（应用名含长度头修正）
+
+## 注意事项
+
+- 首次安装（或从官方版迁移）书架/历史/登录态需重新同步
+- 若官方服务器强制推送 JS 热更，本地修改可能被覆盖，届时需禁用热更逻辑
+- 凌晨时段部分线路接口超时属官方线路质量问题，换线路即可
+
+## 版本历史
+
+| 版本 | 说明 |
+|---|---|
+| fix10 | 应用名改"天堂" |
+| fix9 | 包名 t6qk2z9 + 小猫图标 |
+| fix8 | 删顶栏 logo + 详情页漏网广告 |
+| fix7 | 全站简体中文 |
+| fix6 | 删签到/赞助浮动按钮 |
+| fix5 | 删个人中心 tab |
+| fix4 | 删年龄确认页 |
+| fix3 | 杀开屏广告残留页 + 四格广告页 |
+| 原始修改 | 全去广告 + 删游戏/电影板块 |
+
+## 参考文献
+
+修改过程中使用到的公开技术资料与工具：
+
+**官方文档**
+
+- [Android 应用签名方案（apksigner）](https://developer.android.com/studio/command-line/apksigner)
+- [DEX 文件格式规范（art/dex format）](https://source.android.com/docs/core/runtime/dex-format)
+- [自适应图标（Adaptive Icons）](https://developer.android.com/develop/ui/views/graphics/adaptive-icon)
+- [Android 应用资源（resources.arsc）](https://developer.android.com/guide/topics/resources/providing-resources)
+- [APK 签名方案 v2](https://source.android.com/docs/security/features/apksigning/v2)
+
+**开源项目与工具**
+
+- [OpenCC——繁简中文转换](https://github.com/BYVoid/OpenCC)（opencc-python-reimplemented）
+- [Android Build-Tools](https://developer.android.com/tools/releases/build-tools)（aapt2 / zipalign / apksigner）
+- [Pillow（PIL）](https://github.com/python-pillow/Pillow)——图标生成
+- [GitHub CLI](https://cli.github.com/)
+
+**社区资料**
+
+- [APK 文件结构解析](https://en.wikipedia.org/wiki/Apk_(file_format))
+- [Zipfile——Python 标准库](https://docs.python.org/3/library/zipfile.html)（APK 重建）
+
+## 免责声明
+
+本项目仅供学习与研究，请于 24 小时内自行删除，不得用于商业用途。所有内容版权归原作者所有。使用本项目产生的任何后果由使用者自行承担。
